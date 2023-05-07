@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerIdleState : PlayerBaseState
+public class PlayerIdleState : PlayerGroundedState
 {
     public PlayerIdleState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
@@ -16,7 +16,8 @@ public class PlayerIdleState : PlayerBaseState
     }
     public override void Tick(float deltaTime)
     {
-        if(stateMachine.xInput() != 0)
+
+        if (stateMachine.xInput() != 0)
         {
             stateMachine.SwitchState(new PlayerMoveState(stateMachine));
         }

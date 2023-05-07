@@ -10,6 +10,7 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public float moveSpeed { get; private set; } = 12f;
     private void Start()
     {
+        
         SwitchState(new PlayerIdleState(this));
     }
 

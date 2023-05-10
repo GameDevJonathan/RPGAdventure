@@ -5,9 +5,11 @@ using UnityEngine;
 public class PlayerMoveState : PlayerGroundedState
 {
     float moveSpeed;
+    Rigidbody2D rb;
     public PlayerMoveState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
         this.moveSpeed = stateMachine.moveSpeed;
+        this.rb = stateMachine.rigidBody;
     }
 
     public override void Enter()
@@ -23,11 +25,21 @@ public class PlayerMoveState : PlayerGroundedState
 
     public override void Tick(float deltaTime)
     {
-        stateMachine.SetVelocity(stateMachine.xInput() * moveSpeed, stateMachine.rigidBody.velocity.y) ;
-        if (stateMachine.xInput() == 0)
+
+
+        stateMachine.SetVelocity(_xInput * moveSpeed, rb.velocity.y);
+
+        if (_xInput == 0)
         {
             stateMachine.SwitchState(new PlayerIdleState(stateMachine));
+            return;
         }
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("button pressed");
+            stateMachine.SwitchState(new PlayerJumpState(stateMachine));
+            return;
+        }
     }
 }

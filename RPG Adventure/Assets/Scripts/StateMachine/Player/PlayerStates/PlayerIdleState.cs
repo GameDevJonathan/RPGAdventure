@@ -11,15 +11,24 @@ public class PlayerIdleState : PlayerGroundedState
 
     public override void Enter()
     {
+        Debug.Log("entering state");
         stateMachine.Animator.Play("Idle");
         
     }
     public override void Tick(float deltaTime)
     {
-
-        if (stateMachine.xInput() != 0)
+        Debug.Log("idlestate:: tick method");
+        if (_xInput != 0)
         {
             stateMachine.SwitchState(new PlayerMoveState(stateMachine));
+            return;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("button pressed");
+            stateMachine.SwitchState(new PlayerJumpState(stateMachine));
+            return;
         }
     }
 

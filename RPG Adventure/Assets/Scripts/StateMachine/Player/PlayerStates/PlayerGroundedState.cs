@@ -14,7 +14,7 @@ public class PlayerGroundedState : PlayerBaseState
     }
     public override void Tick(float deltaTime)
     {
-        
+        Debug.Log("grounded state update");   
     }
 
     public override void Exit()

@@ -10,18 +10,18 @@ public class PlayerGroundedState : PlayerBaseState
 
     public override void Enter()
     {
-        
+
     }
     public override void Tick(float deltaTime)
     {
-        Debug.Log("grounded state update");   
+        Debug.Log("grounded state update");
     }
 
     public override void Exit()
     {
-        
+
     }
 
 
-    
+
 }

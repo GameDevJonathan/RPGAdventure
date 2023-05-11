@@ -6,16 +6,15 @@ public class PlayerIdleState : PlayerGroundedState
 {
     public PlayerIdleState(PlayerStateMachine stateMachine) : base(stateMachine)
     {
-        
     }
 
     public override void Enter()
     {
         Debug.Log("entering state");
         stateMachine.Animator.Play("Idle");
-        
+
     }
-    public override void Tick(float deltaTime)
+    public override void Tick(float deltime)
     {
         Debug.Log("idlestate:: tick method");
         if (_xInput != 0)
@@ -34,7 +33,8 @@ public class PlayerIdleState : PlayerGroundedState
 
     public override void Exit()
     {
-        
+
     }
 
+    
 }

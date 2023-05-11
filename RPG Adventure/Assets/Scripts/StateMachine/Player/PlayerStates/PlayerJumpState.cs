@@ -15,9 +15,9 @@ public class PlayerJumpState : PlayerBaseState
     public override void Enter()
     {
         Debug.Log("entering state jump");
-        rb.velocity = new Vector2(rb.velocity.x, jumpforce );
+        rb.velocity = new Vector2(rb.velocity.x, jumpforce);
         stateMachine.Animator.Play("JumpFall");
-        
+
     }
     public override void Tick(float deltaTime)
     {
@@ -31,7 +31,7 @@ public class PlayerJumpState : PlayerBaseState
 
     public override void Exit()
     {
-        
+
     }
 
 }

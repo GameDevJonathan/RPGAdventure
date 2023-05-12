@@ -23,7 +23,7 @@ public class PlayerIdleState : PlayerGroundedState
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && IsGroundDectected())
         {
             Debug.Log("button pressed");
             stateMachine.SwitchState(new PlayerJumpState(stateMachine));

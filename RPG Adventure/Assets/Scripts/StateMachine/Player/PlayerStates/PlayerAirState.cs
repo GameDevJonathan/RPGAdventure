@@ -14,14 +14,14 @@ public class PlayerAirState : PlayerBaseState
 
     public override void Enter()
     {
-        Debug.Log("entering state");
+        
         stateMachine.Animator.Play("JumpFall");
     }
     public override void Tick(float deltaTime)
     {
-        Debug.Log("velocity" + rb.velocity.y);
+        
         stateMachine.Animator.SetFloat("yVelocity", rb.velocity.y);
-        if (rb.velocity.y == 0)
+        if (IsGroundDectected())
         {
             stateMachine.SwitchState(new PlayerIdleState(stateMachine));
             return;

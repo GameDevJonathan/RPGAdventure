@@ -27,7 +27,7 @@ public class PlayerMoveState : PlayerGroundedState
     {
 
 
-        stateMachine.SetVelocity(_xInput * moveSpeed, rb.velocity.y);
+        SetVelocity(_xInput * moveSpeed, rb.velocity.y);
 
         if (_xInput == 0)
         {
@@ -35,7 +35,7 @@ public class PlayerMoveState : PlayerGroundedState
             return;
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && IsGroundDectected())
         {
             Debug.Log("button pressed");
             stateMachine.SwitchState(new PlayerJumpState(stateMachine));

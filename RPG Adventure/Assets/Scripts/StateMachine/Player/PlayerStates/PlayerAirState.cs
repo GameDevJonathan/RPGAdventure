@@ -21,6 +21,10 @@ public class PlayerAirState : PlayerBaseState
     {
         
         stateMachine.Animator.SetFloat("yVelocity", rb.velocity.y);
+        if (_dashButton)
+        {
+            stateMachine.SwitchState(new PlayerDashState(stateMachine));
+        }
         if (IsGroundDectected())
         {
             stateMachine.SwitchState(new PlayerIdleState(stateMachine));

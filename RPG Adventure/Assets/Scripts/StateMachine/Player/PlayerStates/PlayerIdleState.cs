@@ -29,6 +29,18 @@ public class PlayerIdleState : PlayerGroundedState
             stateMachine.SwitchState(new PlayerJumpState(stateMachine));
             return;
         }
+
+        if (_dashButton)
+        {
+            stateMachine.SwitchState(new PlayerDashState(stateMachine));
+        }
+
+        if (!IsGroundDectected())
+        {
+            
+            stateMachine.SwitchState(new PlayerAirState(stateMachine));
+            return;
+        }
     }
 
     public override void Exit()

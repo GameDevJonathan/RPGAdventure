@@ -22,6 +22,11 @@ public class PlayerJumpState : PlayerBaseState
     public override void Tick(float deltaTime)
     {
         stateMachine.Animator.SetFloat("yVelocity", rb.velocity.y);
+        if (_dashButton)
+        {
+            stateMachine.SwitchState(new PlayerDashState(stateMachine));
+        }
+        
         if (rb.velocity.y < 0)
         {
             stateMachine.SwitchState(new PlayerAirState(stateMachine));

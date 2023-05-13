@@ -15,15 +15,16 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public Transform wallCheck { get; private set; }
     [field: SerializeField] public float wallCheckDistance;
     [field: SerializeField] public LayerMask whatIsGround;
-    [field: SerializeField] public int facingDir = 1;
-    [field: SerializeField] public bool facingRight = true;
-    [field: SerializeField] public float stateTimer;
-    [field: SerializeField] public float coolDown;
+    [field: SerializeField] public int   facingDir = 1;
+    [field: SerializeField] public bool  facingRight = true;
+    [field: SerializeField] public float dashTimer;
+    [field: SerializeField] public float dashSpeed;
+    [field: SerializeField] public float dashduration = .4f;
+    [field: SerializeField] public float dashDirection;
 
 
     private void Start()
     {
-
         SwitchState(new PlayerIdleState(this));
     }
 
@@ -31,9 +32,16 @@ public class PlayerStateMachine : StateMachine
     {
         facingDir = facingDir * -1;
         facingRight = !facingRight;
-        transform.Rotate(0, 180, 0);
-        
-        
+        transform.Rotate(0, 180, 0);        
+    }
+
+    public float getDashDirection()
+    {
+        dashDirection = Input.GetAxisRaw("Horizontal");
+
+        if (dashDirection == 0)
+            dashDirection = facingDir;
+        return dashDirection;
     }
 
     public void FlipController(float _x)

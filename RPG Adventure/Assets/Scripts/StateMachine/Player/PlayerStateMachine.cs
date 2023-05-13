@@ -17,26 +17,32 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public LayerMask whatIsGround;
     [field: SerializeField] public int facingDir = 1;
     [field: SerializeField] public bool facingRight = true;
+    [field: SerializeField] public float stateTimer;
+    [field: SerializeField] public float coolDown;
+
+
     private void Start()
     {
 
         SwitchState(new PlayerIdleState(this));
     }
 
-    public void Flip(float _x)
+    public void Flip()
     {
-        if(_x > 0)
-        {
-            transform.localScale = new Vector3(1, 1, 1);
-        }else if( _x < 0)
-        {
-            transform.localScale = new Vector3(-1, 1, 1);
-        }
+        facingDir = facingDir * -1;
+        facingRight = !facingRight;
+        transform.Rotate(0, 180, 0);
+        
         
     }
 
     public void FlipController(float _x)
     {
+        if (_x > 0 && !facingRight)
+            Flip();
+        else
+        if (_x < 0 && facingRight)
+            Flip();
         
     }
 
@@ -48,7 +54,8 @@ public class PlayerStateMachine : StateMachine
     private void OnDrawGizmos()
     {
         Gizmos.DrawLine(groundCheck.position, new Vector3(groundCheck.position.x, groundCheck.position.y - groundCheckDistance));
-        Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance, wallCheck.position.y));
+        Gizmos.DrawLine(wallCheck.position, wallCheck.position + (transform.right * wallCheckDistance));
+        //Gizmos.DrawLine(wallCheck.position, new Vector3(wallCheck.position.x + wallCheckDistance, wallCheck.position.y));
     }
 
 }

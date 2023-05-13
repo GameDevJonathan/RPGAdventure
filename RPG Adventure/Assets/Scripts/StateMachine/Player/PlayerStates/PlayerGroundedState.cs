@@ -22,6 +22,11 @@ public class PlayerGroundedState : PlayerBaseState
 
     }
 
+    private void Update()
+    {
+        Debug.Log("update method");
+    }
+
 
 
 }
